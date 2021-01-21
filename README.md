@@ -17,7 +17,7 @@ Before running this pipeline, the following steps must be completed:
 In a regular not advanced data ETL project we would have a script that runs in a certain order some queries for the data warehouse to be populated. The issue with this approach is that it can really slow some tasks that can be run in parallel, for example:
 Lets say we need to insert records in five independent tables that have nothing to do with each other. In a regular approach we will need to wait for a query to be finished in order to start executing the next one. In Apache Airflow, we can run each query at the same time with different workers inside the Redshift Cluster, this speeds the task for at least 5x assuming every table is populated in the same time.
 
-![Airflow Schema](images/airflow_schema.PNG)
+![Airflow Schema](airflow_schema.PNG)
 
 This is the data pipeline design. We first create the tables, then move data from S3 into staging tables, then fact tables, then dimension tables, run some tests and the pipeline is over.
 Having Airflow not only speeds up the ETL, it also allows us to identify which part of the pipeline is broken and why, this is pretty good practice for teamwork.
